@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 @SpringBootTest
 //导入NewCoderCommunity的配置类
-@ContextConfiguration(classes = NewcoderCommunityApplication.class)
+@ContextConfiguration(classes = STCommunityApplication.class)
 public class LoggerTest {
     private static final Logger logger = LoggerFactory.getLogger(LoggerTest.class);
 

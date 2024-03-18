@@ -16,8 +16,8 @@ import java.util.Date;
 
 @SpringBootTest
 //导入NewCoderCommunity的配置类
-@ContextConfiguration(classes = NewcoderCommunityApplication.class)
-class NewcoderCommunityApplicationTests implements ApplicationContextAware {
+@ContextConfiguration(classes = STCommunityApplication.class)
+class STCommunityApplicationTests implements ApplicationContextAware {
 
 	//Spring容器
 	private ApplicationContext applicationContext;
