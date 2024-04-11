@@ -4,7 +4,9 @@ import com.suti.community.entity.DiscussPost;
 import com.suti.community.entity.Page;
 import com.suti.community.entity.User;
 import com.suti.community.service.DiscussPostService;
+import com.suti.community.service.LikeService;
 import com.suti.community.service.UserService;
+import com.suti.community.util.CommunityConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,15 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class HomeController implements CommunityConstant {
     @Autowired
     private DiscussPostService discussPostService;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LikeService likeService;
 
     //处理请求的方法
     @RequestMapping(path = "/index",method = RequestMethod.GET)
@@ -41,10 +46,19 @@ public class HomeController {
                 User user = userService.findUserById(post.getUserId());
                 map.put("user",user);
                 discussPosts.add(map);
+
+                long likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, post.getId());
+                map.put("likeCount", likeCount);
             }
         }
         model.addAttribute("discussPosts",discussPosts);
 
         return "/index";
+    }
+
+    //使用@ExceptionHandler后，错误不会自动跳转到error文件夹下的对应页面，需要写一个方法手动跳转。
+    @RequestMapping(path = "/error", method = RequestMethod.GET)
+    public String getErrorPage() {
+        return "/error/500";
     }
 }

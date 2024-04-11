@@ -19,6 +19,9 @@ public class LoggerTest {
         logger.info("info log");
         logger.warn("warn log");
         logger.error("error log");
+        int h = -8;
+        System.out.println(h<<32);
     }
+
 
 }
