@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+</head>
+<body>
+  <p>
+    <input type="submit" value="提交" onclick="send();">
+  </p>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script>
+  function send(){
+    $.post(
+        "/community/alpha/ajax",//访问路径
+            {"name":"suti","age":23},//向服务器提交的数据  是固定的?
+            //当服务器给浏览器做出响应,浏览器会调用该方法并把服务器返回的数据(data)传给该函数--即我们的string
+            function (data){
+              data = $.parseJSON(data);//将返回的字符串数据转为json对象
+              console.log(data.code);
+              console.log(data.msg);
+            }
+    );
+  }
+</script>
+</html>
